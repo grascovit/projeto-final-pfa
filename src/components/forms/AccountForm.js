@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { Form, Input, Label, Button } from 'semantic-ui-react'
 
+const initialState = { name: '', balance: '', transactions: [] }
+
 class AccountForm extends Component {
   constructor (props) {
     super(props)
-    this.state = { name: '', balance: '', transactions: [] }
+    this.state = initialState
   }
 
   handleInputChange = event => {
@@ -25,10 +27,14 @@ class AccountForm extends Component {
   }
 
   handleSubmit = (event, data) => {
-    if (!this.isValidAccount()) return false
+    if (!this.isValidAccount()) {
+      alert('Não foi possível criar a conta! Por favor, preencha todos os campos obrigatórios.')
+      return false
+    }
 
     this.props.add(this.state)
-    this.setState({ name: '', balance: '' })
+    this.setState(initialState)
+    alert('Conta criada com sucesso!')
   }
 
   render () {
