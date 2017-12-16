@@ -13,7 +13,7 @@ class Navbar extends Component {
 
   componentWillMount() {
     const pathName = this.props.router.location.pathname
-    const name = pathName === '/' ? 'home' : 'formulario'
+    const name = pathName === '/' ? 'home' : 'cadastro'
     this.setState({ activeItem: name })
   }
 
@@ -30,7 +30,7 @@ class Navbar extends Component {
     return (
       <Menu pointing secondary>
         <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-        <Menu.Item name='formulario' active={activeItem === 'formulario'} onClick={this.handleItemClick} />
+        <Menu.Item name='cadastro' active={activeItem === 'cadastro'} onClick={this.handleItemClick} />
       </Menu>
     )
   }

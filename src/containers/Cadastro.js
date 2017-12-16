@@ -4,14 +4,14 @@ import { withRouter } from 'react-router-dom'
 import { Grid } from 'semantic-ui-react'
 import Layout from '../components/layout/Layout'
 
-class Formulario extends Component {
+class Cadastro extends Component {
   render() {
     return (
-      <Layout router={this.props.history} icon='dollar' header='Formulário' subheader='Cadastro de transações'>
+      <Layout router={this.props.history} icon='dollar' header='Cadastro' subheader='Cadastro de transações'>
         <Grid columns={16} stackable padded='vertically'>
           <Grid.Row>
             <Grid.Column width={16} stretched>
-              Formulário
+              Cadastro
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -20,8 +20,8 @@ class Formulario extends Component {
   }
 }
 
-Formulario.contextTypes = {
+Cadastro.contextTypes = {
   router: PropTypes.object.isRequired
 }
 
-export default withRouter(Formulario);
+export default withRouter(Cadastro);

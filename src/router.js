@@ -1,12 +1,12 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import Home from './containers/Home'
-import Formulario from './containers/Formulario'
+import Cadastro from './containers/Cadastro'
 
 const router = (
   <div>
     <Route path='/' exact component={Home} />
-    <Route path='/formulario' exact component={Formulario} />
+    <Route path='/cadastro' exact component={Cadastro} />
   </div>
 )
 
