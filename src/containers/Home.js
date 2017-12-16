@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import { withRouter } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { Grid } from 'semantic-ui-react'
 import Layout from '../components/layout/Layout'
 
@@ -28,8 +30,11 @@ class Home extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+})
+
 Home.contextTypes = {
   router: PropTypes.object.isRequired
 }
 
-export default withRouter(Home);
+export default connect(mapStateToProps)(withRouter(Home))
