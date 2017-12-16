@@ -25,10 +25,14 @@ class AccountForm extends Component {
   }
 
   handleSubmit = (event, data) => {
-    if (!this.isValidAccount()) return false
+    if (!this.isValidAccount()) {
+      alert('Não foi possível criar a conta! Por favor, preencha todos os campos obrigatórios.')
+      return false
+    }
 
     this.props.add(this.state)
     this.setState({ name: '', balance: '' })
+    alert('Conta criada com sucesso!')
   }
 
   render () {
