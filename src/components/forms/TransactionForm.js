@@ -11,7 +11,8 @@ class TransactionForm extends Component {
       accountName: '',
       transaction: {
         type: '',
-        value: ''
+        value: '',
+        date: ''
       }
     }
   }
@@ -57,7 +58,8 @@ class TransactionForm extends Component {
       accountIndex: '',
       transaction: {
         type: '',
-        value: ''
+        value: '',
+        date: ''
       }
     })
   }
@@ -86,10 +88,16 @@ class TransactionForm extends Component {
               <Input name='value' value={this.state.transaction.value} onChange={this.handleInputChange} placeholder='Valor (R$)' />
             </Form.Field>
           </Form.Group>
-          <Form.Field required>
-            <label>Conta</label>
-            <Select name='account' value={this.state.accountName} onChange={this.handleAccountChange} placeholder='Conta' options={this.accountOptions()} />
-          </Form.Field>
+          <Form.Group widths='equal'>
+            <Form.Field required>
+              <label>Conta</label>
+              <Select name='account' value={this.state.accountName} onChange={this.handleAccountChange} placeholder='Conta' options={this.accountOptions()} />
+            </Form.Field>
+            <Form.Field required>
+              <label>Data da transação</label>
+              <Input name='date' type='date' value={this.state.transaction.date} onChange={this.handleInputChange} placeholder='Data (dd/mm/yyyy)' />
+            </Form.Field>
+          </Form.Group>
           <Button color='teal' onClick={this.handleSubmit}>Adicionar</Button>
         </Form>
       </div>
