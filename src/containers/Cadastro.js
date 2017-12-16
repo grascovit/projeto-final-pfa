@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { Grid } from 'semantic-ui-react'
 import Layout from '../components/layout/Layout'
+import { addAccount, addTransaction } from '../reducers/accounts/actions'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 class Cadastro extends Component {
   render() {
@@ -24,4 +27,13 @@ Cadastro.contextTypes = {
   router: PropTypes.object.isRequired
 }
 
-export default withRouter(Cadastro);
+const mapStateToProps = state => ({
+  accounts: state.accounts
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  addAccount,
+  addTransaction
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Cadastro))
