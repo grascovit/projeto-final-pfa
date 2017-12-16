@@ -6,6 +6,7 @@ import Layout from '../components/layout/Layout'
 import { addAccount, addTransaction } from '../reducers/accounts/actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import AccountForm from '../components/forms/AccountForm'
 
 class Cadastro extends Component {
   render() {
@@ -14,7 +15,7 @@ class Cadastro extends Component {
         <Grid columns={16} stackable padded='vertically'>
           <Grid.Row>
             <Grid.Column width={16} stretched>
-              Cadastro
+              <AccountForm add={this.props.addAccount}/>
             </Grid.Column>
           </Grid.Row>
         </Grid>
