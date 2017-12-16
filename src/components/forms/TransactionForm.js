@@ -2,19 +2,20 @@ import React, { Component } from 'react'
 import { Form, Input, Select, Label, Button } from 'semantic-ui-react'
 import TransactionType from '../../enums/TransactionType'
 
+const initialState = {
+  accountIndex: '',
+  accountName: '',
+  transaction: {
+    type: '',
+    value: '',
+    date: ''
+  }
+}
+
 class TransactionForm extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      accountIndex: '',
-      accountName: '',
-      transaction: {
-        type: '',
-        value: '',
-        date: ''
-      }
-    }
+    this.state = initialState
   }
 
   handleInputChange = (event) => {
@@ -53,15 +54,7 @@ class TransactionForm extends Component {
     event.preventDefault()
 
     this.props.add(this.state.accountIndex, this.state.transaction)
-    this.setState({
-      accountName: '',
-      accountIndex: '',
-      transaction: {
-        type: '',
-        value: '',
-        date: ''
-      }
-    })
+    this.setState(initialState)
   }
 
   accountOptions = () => {
@@ -75,7 +68,7 @@ class TransactionForm extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{marginTop: '30px'}}>
         <Label as='a' color='teal' ribbon>Adicione uma nova transação:</Label>
         <Form style={{marginTop: '20px'}}>
           <Form.Group widths='equal'>
