@@ -50,11 +50,27 @@ class TransactionForm extends Component {
     this.setState({accountName, accountIndex})
   }
 
+  isValidTransaction = () => {
+    const { accountName, accountIndex, transaction } = this.state
+
+    if (transaction.type === '' || transaction.type === undefined || transaction.type === null) return false
+    if (transaction.value === '' || transaction.value === undefined || transaction.value === null) return false
+    if (transaction.date === '' || transaction.date === undefined || transaction.date === null) return false
+    if (accountName === '' || accountName === undefined || accountName === null) return false
+    if (accountIndex === '' || accountIndex === undefined || accountIndex === null) return false
+
+    return true
+  }
+
   handleSubmit = (event, data) => {
-    event.preventDefault()
+    if (!this.isValidTransaction()) {
+      alert('Não foi possível criar a transação! Por favor, preencha todos os campos obrigatórios.')
+      return false
+    }
 
     this.props.add(this.state.accountIndex, this.state.transaction)
     this.setState(initialState)
+    alert('Transação criada com sucesso!')
   }
 
   accountOptions = () => {
