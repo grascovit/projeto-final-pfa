@@ -7,6 +7,7 @@ import { addAccount, addTransaction } from '../reducers/accounts/actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import AccountForm from '../components/forms/AccountForm'
+import TransactionForm from '../components/forms/TransactionForm'
 
 class Cadastro extends Component {
   render() {
@@ -16,6 +17,11 @@ class Cadastro extends Component {
           <Grid.Row>
             <Grid.Column width={16} stretched>
               <AccountForm add={this.props.addAccount}/>
+              <TransactionForm 
+                accounts={this.props.accounts}
+                add={this.props.addTransaction}
+                handleInputChange={this.handleInputChange}
+              />
             </Grid.Column>
           </Grid.Row>
         </Grid>

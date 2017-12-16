@@ -4,7 +4,7 @@ import { Form, Input, Label, Button } from 'semantic-ui-react'
 class AccountForm extends Component {
   constructor (props) {
     super(props)
-    this.state = { name: null, balance: null }
+    this.state = { name: '', balance: '', transactions: [] }
   }
 
   handleInputChange = event => {
@@ -28,7 +28,7 @@ class AccountForm extends Component {
     if (!this.isValidAccount()) return false
 
     this.props.add(this.state)
-    this.setState({ name: null, balance: null })
+    this.setState({ name: '', balance: '' })
   }
 
   render () {
@@ -39,11 +39,11 @@ class AccountForm extends Component {
           <Form.Group>
             <Form.Field required width={12}>
               <label>Nome</label>
-              <Input name='name' defaultValue={this.state.name} onChange={this.handleInputChange} placeholder='Nome da conta' />
+              <Input name='name' value={this.state.name} onChange={this.handleInputChange} placeholder='Nome da conta' />
             </Form.Field>
             <Form.Field required width={4}>
               <label>Saldo (R$)</label>
-              <Input name='balance' type='number' defaultValue={this.state.balance} onChange={this.handleInputChange} placeholder='1234,56' />
+              <Input name='balance' type='number' value={this.state.balance} onChange={this.handleInputChange} placeholder='1234,56' />
             </Form.Field>
           </Form.Group>
           <Button color='teal' onClick={this.handleSubmit}>Adicionar</Button>
