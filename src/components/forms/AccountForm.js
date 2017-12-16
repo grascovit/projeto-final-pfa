@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { Form, Input, Label, Button } from 'semantic-ui-react'
 
+const initialState = { name: '', balance: '', transactions: [] }
+
 class AccountForm extends Component {
   constructor (props) {
     super(props)
-    this.state = { name: '', balance: '', transactions: [] }
+    this.state = initialState
   }
 
   handleInputChange = event => {
@@ -31,7 +33,7 @@ class AccountForm extends Component {
     }
 
     this.props.add(this.state)
-    this.setState({ name: '', balance: '' })
+    this.setState(initialState)
     alert('Conta criada com sucesso!')
   }
 
