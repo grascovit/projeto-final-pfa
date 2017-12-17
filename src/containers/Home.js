@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Grid, Accordion, Icon, List, Divider } from 'semantic-ui-react'
+import { Grid, Accordion, Icon, List, Divider, Label } from 'semantic-ui-react'
 import Layout from '../components/layout/Layout'
 import FiltersForm from '../components/forms/FiltersForm'
 
@@ -29,32 +29,41 @@ class Home extends Component {
     const { activeIndex } = this.state
 
     return (
-      <div key={index}>
+      <div key={index} style={{ marginBottom: '15px' }}>
         <Accordion.Title active={activeIndex === index} index={index} onClick={this.handleClick}>
           <Icon name='dropdown'/>
-          {account.name}
+          <Label as='a' color='teal' pointing='left' basic style={{ padding: '10px 40px' }}>
+            {account.name}
+            <Label circular color='teal' floating>R${account.balance}</Label>
+          </Label>
         </Accordion.Title>
         <Accordion.Content active={activeIndex === index}>
-          <p>Saldo: R${account.balance}</p>
-          {
-            account.transactions.map((transaction, index) => {
-              return this.renderTransaction(transaction, index)
-            })
-          }
+          {(account.transactions && account.transactions.length > 0) ? (
+            <div>
+              <p>Transações:</p><br/>
+
+              <List relaxed>
+                {account.transactions.map((transaction, index) => this.renderTransaction(transaction, index))}
+              </List>
+            </div>
+          ) : (
+            <p>Não existem transações cadastradas nesta conta.</p>
+          )}
         </Accordion.Content>
-
       </div>
-
     )
   }
 
   renderTransaction = (transaction, index) => {
     const { activeIndex } = this.state
+    const iconOptions = transaction.type === 'credit' ? { icon: 'add circle', color: 'green' } : { icon: 'minus circle', color: 'red' }
 
     return (
       <List.Item key={index} active={activeIndex === index}>
+        <List.Icon name={iconOptions.icon} size='large' verticalAlign='middle' color={iconOptions.color} />
         <List.Content>
-          <List.Header>{TRANSACTION_TYPES[transaction.type]} no valor de R${transaction.value} no dia {transaction.date}</List.Header>
+          <List.Header>{TRANSACTION_TYPES[transaction.type]} no valor de R${transaction.value}</List.Header>
+          <List.Description>Em: {transaction.date}</List.Description>
         </List.Content>
       </List.Item>
     )
