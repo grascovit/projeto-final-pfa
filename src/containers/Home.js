@@ -71,7 +71,20 @@ class Home extends Component {
     )
   }
 
+  anyActiveFilter = () => {
+    const { activeFilters } = this.props
+    const filteringAccount = activeFilters.account && Object.keys(activeFilters.account).length
+
+    if (filteringAccount || activeFilters.value || activeFilters.startDate || activeFilters.endDate) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   render() {
+    let items = this.anyActiveFilter() ? this.props.filteredAccounts : this.props.accounts
+
     return (
       <Layout router={this.props.history} icon='home' header='Home' subheader='Posição consolidada das contas'>
         <Grid columns={16} stackable padded='vertically'>
@@ -81,12 +94,12 @@ class Home extends Component {
             </Grid.Column>
           </Grid.Row>
 
-          {this.props.accounts && this.props.accounts.length > 0 && (
+          {items && items.length > 0 && (
             <Grid.Row>
               <Grid.Column width={16} stretched>
                 <Divider style={{marginBottom: '30px'}}/>
                 <Accordion>
-                  {this.props.accounts.map((account, index) => this.renderAccount(account, index))}
+                  {items.map((account, index) => this.renderAccount(account, index))}
                 </Accordion>
               </Grid.Column>
             </Grid.Row>
@@ -98,7 +111,9 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  accounts: state.accounts
+    accounts: state.accounts,
+    activeFilters: state.filters.activeFilters,
+    filteredAccounts: state.filters.filteredAccounts
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

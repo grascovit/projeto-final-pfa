@@ -2,35 +2,48 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input, Select, Label, Button } from 'semantic-ui-react'
 
+const initialState = {
+  accountName: '',
+  filters: {
+    account: {},
+    value: '',
+    startDate: '',
+    endDate: ''
+  }
+}
+
 class FiltersForm extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      accountIndex: '',
-      accountName: '',
-      value: '',
-      startDate: '',
-      endDate: ''
-    }
+    this.state = initialState
   }
 
   handleInputChange = (event) => {
+    let filters = {...this.state.filters}
     const property = event.target.name
     const value = event.target.value
 
-    this.setState({[property]: value})
+    filters[property] = value
+
+    this.setState({filters})
+    this.props.addFilters(filters)
   }
 
   handleAccountChange = (event, data) => {
-    let accountName = this.props.accounts.find(element => {
-      return element.name === data.value
-    }).name
-    let accountIndex = this.props.accounts.findIndex(element => {
+    let filters = {...this.state.filters}
+    let account = this.props.accounts.find(element => {
       return element.name === data.value
     })
+    let accountName = account.name
 
-    this.setState({accountName, accountIndex})
+    filters['account'] = account
+
+    this.setState({filters, accountName})
+    this.props.addFilters(filters)
+  }
+
+  handleCleanFiltersClick = (event, data) => {
+    this.setState(initialState, this.props.addFilters({}))
   }
 
   accountOptions = () => {
@@ -42,43 +55,29 @@ class FiltersForm extends Component {
     })
   }
 
-  handleSubmit = (event, data) => {
-    const { accounts } = this.props
-
-    if (accounts.length === 0){
-      alert('Ainda não existem contas ou transações cadastradas.')
-      return false
-    }
-
-    this.props.addFilters(this.state)
-  }
-
   render() {
     return (
-      <div>
-        <Label as='a' color='teal' ribbon>Filtros:</Label>
-        <Form style={{marginTop: '20px'}}>
-          <Form.Group widths='equal'>
-            <Form.Field>
-              <label>Filtro por conta</label>
-              <Select name='account' value={this.state.account} onChange={this.handleAccountChange} placeholder='Filtrar por conta' options={this.accountOptions()} />
-            </Form.Field>
-            <Form.Field>
-              <label>Filtro por valor</label>
-              <Input name='value' value={this.state.value} onChange={this.handleInputChange} placeholder='Filtrar por valor da transação' />
-            </Form.Field>
-            <Form.Field>
-              <label>Data inicial</label>
-              <Input name='startDate' type='date' value={this.state.startDate} onChange={this.handleInputChange} placeholder='Data inicial' />
-            </Form.Field>
-            <Form.Field>
-              <label>Data final</label>
-              <Input name='endDate' type='date' value={this.state.endDate} onChange={this.handleInputChange} placeholder='Data final' />
-            </Form.Field>
-          </Form.Group>
-          <Button color='teal' onClick={this.handleSubmit}>Aplicar filtros</Button>
-        </Form>
-      </div>
+      <Form style={{marginTop: '20px'}}>
+        <Form.Group widths='equal'>
+          <Form.Field>
+            <label>Filtro por conta</label>
+            <Select name='account' value={this.state.accountName} onChange={this.handleAccountChange} placeholder='Filtrar por conta' options={this.accountOptions()} />
+          </Form.Field>
+          <Form.Field>
+            <label>Filtro por valor</label>
+            <Input name='value' value={this.state.filters.value} onChange={this.handleInputChange} placeholder='Filtrar por valor da transação' />
+          </Form.Field>
+          <Form.Field>
+            <label>Data inicial</label>
+            <Input name='startDate' type='date' value={this.state.filters.startDate} onChange={this.handleInputChange} placeholder='Data inicial' />
+          </Form.Field>
+          <Form.Field>
+            <label>Data final</label>
+            <Input name='endDate' type='date' value={this.state.filters.endDate} onChange={this.handleInputChange} placeholder='Data final' />
+          </Form.Field>
+        </Form.Group>
+        <Button color='teal' onClick={this.handleCleanFiltersClick}>Limpar filtros</Button>
+      </Form>
     )
   }
 }
