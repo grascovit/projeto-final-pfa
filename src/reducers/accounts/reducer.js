@@ -11,12 +11,12 @@ export default (state = initialState, action) => {
     case 'ADD_TRANSACTION':
       let newState = [...state]
       let account = newState[action.index]
-      let balance = parseInt(account.balance)
+      let balance = parseFloat(account.balance)
 
       if (action.transaction.type === 'debit') {
-        balance -= parseInt(action.transaction.value)
+        balance -= parseFloat(action.transaction.value)
       } else {
-        balance += parseInt(action.transaction.value)
+        balance += parseFloat(action.transaction.value)
       }
 
       account.balance = balance

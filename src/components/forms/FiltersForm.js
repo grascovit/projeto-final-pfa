@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Form, Input, Select, Label } from 'semantic-ui-react'
 
 class FiltersForm extends Component {
@@ -66,9 +67,20 @@ class FiltersForm extends Component {
           </Form.Group>
         </Form>
       </div>
-
     )
   }
+}
+
+FiltersForm.propTypes = {
+  accounts: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    balance: PropTypes.number.isRequired,
+    transactions: PropTypes.arrayOf(PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+      date: PropTypes.number.isRequired
+    }))
+  }))
 }
 
 export default FiltersForm

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Form, Input, Label, Button } from 'semantic-ui-react'
 
 const initialState = { name: '', balance: '', transactions: [] }
@@ -57,6 +58,10 @@ class AccountForm extends Component {
       </div>
     )
   }
+}
+
+AccountForm.propTypes = {
+  add: PropTypes.func.isRequired
 }
 
 export default AccountForm

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Form, Input, Select, Label, Button } from 'semantic-ui-react'
 import TransactionType from '../../enums/TransactionType'
 
@@ -93,7 +94,7 @@ class TransactionForm extends Component {
             </Form.Field>
             <Form.Field>
               <label>Valor</label>
-              <Input name='value' value={this.state.transaction.value} onChange={this.handleInputChange} placeholder='Valor (R$)' />
+              <Input name='value' type='number' value={this.state.transaction.value} onChange={this.handleInputChange} placeholder='1234,56' />
             </Form.Field>
           </Form.Group>
           <Form.Group widths='equal'>
@@ -111,6 +112,19 @@ class TransactionForm extends Component {
       </div>
     )
   }
+}
+
+TransactionForm.propTypes = {
+  add: PropTypes.func.isRequired,
+  accounts: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    balance: PropTypes.number.isRequired,
+    transactions: PropTypes.arrayOf(PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+      date: PropTypes.number.isRequired
+    }))
+  }))
 }
 
 export default TransactionForm

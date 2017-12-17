@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Menu } from 'semantic-ui-react'
 
 class Navbar extends Component {
@@ -34,6 +35,10 @@ class Navbar extends Component {
       </Menu>
     )
   }
+}
+
+Navbar.propTypes = {
+  router: PropTypes.object.isRequired
 }
 
 export default Navbar

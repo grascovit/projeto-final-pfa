@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Container, Grid, Icon, Header } from 'semantic-ui-react'
 import Navbar from './Navbar'
 
@@ -28,6 +29,14 @@ class Layout extends Component {
       </Container>
     )
   }
+}
+
+Layout.propTypes = {
+  router: PropTypes.object.isRequired,
+  icon: PropTypes.string.isRequired,
+  header: PropTypes.string.isRequired,
+  subheader: PropTypes.string,
+  children: PropTypes.node.isRequired
 }
 
 export default Layout

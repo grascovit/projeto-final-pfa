@@ -90,8 +90,16 @@ const mapStateToProps = state => ({
   accounts: state.accounts
 })
 
-Home.contextTypes = {
-  router: PropTypes.object.isRequired
+Home.propTypes = {
+  accounts: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    balance: PropTypes.number.isRequired,
+    transactions: PropTypes.arrayOf(PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+      date: PropTypes.number.isRequired
+    }))
+  }))
 }
 
 export default connect(mapStateToProps)(withRouter(Home))

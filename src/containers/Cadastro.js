@@ -17,11 +17,7 @@ class Cadastro extends Component {
           <Grid.Row>
             <Grid.Column width={16} stretched>
               <AccountForm add={this.props.addAccount}/>
-              <TransactionForm 
-                accounts={this.props.accounts}
-                add={this.props.addTransaction}
-                handleInputChange={this.handleInputChange}
-              />
+              <TransactionForm accounts={this.props.accounts} add={this.props.addTransaction}/>
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -30,8 +26,18 @@ class Cadastro extends Component {
   }
 }
 
-Cadastro.contextTypes = {
-  router: PropTypes.object.isRequired
+Cadastro.propTypes = {
+  addAccount: PropTypes.func.isRequired,
+  addTransaction: PropTypes.func.isRequired,
+  accounts: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    balance: PropTypes.number.isRequired,
+    transactions: PropTypes.arrayOf(PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+      date: PropTypes.number.isRequired
+    }))
+  }))
 }
 
 const mapStateToProps = state => ({
