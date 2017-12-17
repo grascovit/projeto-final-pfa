@@ -39,7 +39,6 @@ class TransactionForm extends Component {
   }
 
   handleAccountChange = (event, data) => {
-    let transaction = {...this.state.transaction}
     let accountName = this.props.accounts.find(element => {
       return element.name === data.value
     }).name

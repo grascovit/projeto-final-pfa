@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Grid, Accordion, Icon, List } from 'semantic-ui-react'
+import { Grid, Accordion, Icon, List, Divider } from 'semantic-ui-react'
 import Layout from '../components/layout/Layout'
 import FiltersForm from '../components/forms/FiltersForm'
 
@@ -65,23 +65,21 @@ class Home extends Component {
       <Layout router={this.props.history} icon='home' header='Home' subheader='Posição consolidada das contas'>
         <Grid columns={16} stackable padded='vertically'>
           <Grid.Row>
-            <Grid.Column width={16} stretched>
-              <FiltersForm
-                accounts={this.props.accounts}
-              />
+            <Grid.Column width={16}>
+              <FiltersForm accounts={this.props.accounts} style={{marginTop: '20px'}}/>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
-            <Grid.Column width={16} stretched>
-              <Accordion>
-                {
-                  this.props.accounts.map((account, index) => {
-                    return this.renderAccount(account, index)
-                  })
-                }
-              </Accordion>
-            </Grid.Column>
-          </Grid.Row>
+
+          {this.props.accounts && this.props.accounts.length > 0 && (
+            <Grid.Row>
+              <Grid.Column width={16} stretched>
+                <Divider style={{marginBottom: '30px'}}/>
+                <Accordion>
+                  {this.props.accounts.map((account, index) => this.renderAccount(account, index))}
+                </Accordion>
+              </Grid.Column>
+            </Grid.Row>
+          )}
         </Grid>
       </Layout>
     )

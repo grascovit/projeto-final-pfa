@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Input, Select, Label, Button } from 'semantic-ui-react'
+import { Form, Input, Select, Label } from 'semantic-ui-react'
 
 class FiltersForm extends Component {
   constructor(props) {
@@ -43,26 +43,30 @@ class FiltersForm extends Component {
 
   render() {
     return (
-      <Form style={{marginTop: '20px'}}>
-        <Form.Group widths='equal'>
-          <Form.Field>
-            <label>Filtro por conta</label>
-            <Select name='account' value={this.state.account} onChange={this.handleAccountChange} placeholder='Filtrar por conta' options={this.accountOptions()} />
-          </Form.Field>
-          <Form.Field>
-            <label>Filtro por valor</label>
-            <Input name='value' value={this.state.value} onChange={this.handleInputChange} placeholder='Filtrar por valor da transação' />
-          </Form.Field>
-          <Form.Field>
-            <label>Data inicial</label>
-            <Input name='startDate' type='date' value={this.state.startDate} onChange={this.handleInputChange} placeholder='Data inicial' />
-          </Form.Field>
-          <Form.Field>
-            <label>Data final</label>
-            <Input name='endDate' type='date' value={this.state.endDate} onChange={this.handleInputChange} placeholder='Data final' />
-          </Form.Field>
-        </Form.Group>
-      </Form>
+      <div>
+        <Label as='a' color='teal' ribbon>Filtros:</Label>
+        <Form style={{marginTop: '20px'}}>
+          <Form.Group widths='equal'>
+            <Form.Field>
+              <label>Filtro por conta</label>
+              <Select name='account' value={this.state.account} onChange={this.handleAccountChange} placeholder='Filtrar por conta' options={this.accountOptions()} />
+            </Form.Field>
+            <Form.Field>
+              <label>Filtro por valor</label>
+              <Input name='value' value={this.state.value} onChange={this.handleInputChange} placeholder='Filtrar por valor da transação' />
+            </Form.Field>
+            <Form.Field>
+              <label>Data inicial</label>
+              <Input name='startDate' type='date' value={this.state.startDate} onChange={this.handleInputChange} placeholder='Data inicial' />
+            </Form.Field>
+            <Form.Field>
+              <label>Data final</label>
+              <Input name='endDate' type='date' value={this.state.endDate} onChange={this.handleInputChange} placeholder='Data final' />
+            </Form.Field>
+          </Form.Group>
+        </Form>
+      </div>
+
     )
   }
 }

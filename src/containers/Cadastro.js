@@ -12,7 +12,7 @@ import TransactionForm from '../components/forms/TransactionForm'
 class Cadastro extends Component {
   render() {
     return (
-      <Layout router={this.props.history} icon='dollar' header='Cadastro' subheader='Cadastro de transações'>
+      <Layout router={this.props.history} icon='dollar' header='Cadastro' subheader='Cadastro de contas e transações'>
         <Grid columns={16} stackable padded='vertically'>
           <Grid.Row>
             <Grid.Column width={16} stretched>
