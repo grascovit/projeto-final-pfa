@@ -20,7 +20,10 @@ export default (state = initialState, action) => {
       }
 
       account.balance = balance
-      account.transactions.push(action.transaction)
+
+      let transactions = [...account.transactions]
+      transactions.push(action.transaction)
+      account.transactions = transactions
 
       return newState
 
