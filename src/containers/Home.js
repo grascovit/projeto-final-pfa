@@ -108,11 +108,17 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 Home.propTypes = {
   accounts: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    balance: PropTypes.number.isRequired,
+    balance: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]).isRequired,
     transactions: PropTypes.arrayOf(PropTypes.shape({
       type: PropTypes.string.isRequired,
-      value: PropTypes.number.isRequired,
-      date: PropTypes.number.isRequired
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+      ]).isRequired,
+      date: PropTypes.string.isRequired
     }))
   }))
 }
