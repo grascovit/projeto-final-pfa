@@ -4,11 +4,13 @@ import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import rootReducer from './reducers/rootReducer'
 import { initialState as accounts } from './reducers/accounts/reducer'
+import { initialState as filters } from './reducers/filters/reducer'
 
 export const history = createHistory()
 
 const initialState = {
-  accounts
+  accounts,
+  filters
 }
 const enhancers = []
 const middleware = [

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, Select, Label } from 'semantic-ui-react'
+import { Form, Input, Select, Label, Button } from 'semantic-ui-react'
 
 class FiltersForm extends Component {
   constructor(props) {
@@ -42,6 +42,17 @@ class FiltersForm extends Component {
     })
   }
 
+  handleSubmit = (event, data) => {
+    const { accounts } = this.props
+
+    if (accounts.length === 0){
+      alert('Ainda não existem contas ou transações cadastradas.')
+      return false
+    }
+
+    this.props.addFilters(this.state)
+  }
+
   render() {
     return (
       <div>
@@ -65,6 +76,7 @@ class FiltersForm extends Component {
               <Input name='endDate' type='date' value={this.state.endDate} onChange={this.handleInputChange} placeholder='Data final' />
             </Form.Field>
           </Form.Group>
+          <Button color='teal' onClick={this.handleSubmit}>Aplicar filtros</Button>
         </Form>
       </div>
     )
@@ -80,7 +92,8 @@ FiltersForm.propTypes = {
       value: PropTypes.number.isRequired,
       date: PropTypes.number.isRequired
     }))
-  }))
+  })),
+  addFilters: PropTypes.func.isRequired
 }
 
 export default FiltersForm

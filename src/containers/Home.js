@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { Grid, Accordion, Icon, List, Divider, Label } from 'semantic-ui-react'
 import Layout from '../components/layout/Layout'
 import FiltersForm from '../components/forms/FiltersForm'
+import { addFilters } from '../reducers/filters/actions'
+import { bindActionCreators } from 'redux'
 
 export const TRANSACTION_TYPES = { debit: 'Débito', credit: 'Crédito' }
 
@@ -75,7 +77,7 @@ class Home extends Component {
         <Grid columns={16} stackable padded='vertically'>
           <Grid.Row>
             <Grid.Column width={16}>
-              <FiltersForm accounts={this.props.accounts} style={{marginTop: '20px'}}/>
+              <FiltersForm accounts={this.props.accounts} style={{marginTop: '20px'}} addFilters={this.props.addFilters}/>
             </Grid.Column>
           </Grid.Row>
 
@@ -99,6 +101,10 @@ const mapStateToProps = state => ({
   accounts: state.accounts
 })
 
+const mapDispatchToProps = dispatch => bindActionCreators({
+  addFilters
+}, dispatch)
+
 Home.propTypes = {
   accounts: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -111,4 +117,4 @@ Home.propTypes = {
   }))
 }
 
-export default connect(mapStateToProps)(withRouter(Home))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home))
