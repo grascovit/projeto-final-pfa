@@ -7,6 +7,7 @@ import Layout from '../components/layout/Layout'
 import FiltersForm from '../components/forms/FiltersForm'
 import { addFilters } from '../reducers/filters/actions'
 import { bindActionCreators } from 'redux'
+import base from '../base'
 
 export const TRANSACTION_TYPES = { debit: 'Débito', credit: 'Crédito' }
 
@@ -17,6 +18,21 @@ class Home extends Component {
     this.state = {
       activeIndex: null
     }
+  }
+
+  componentWillMount () {
+    this.ref = base.syncState('accounts', {
+      context: this,
+      state: 'accounts'
+    })
+  }
+
+  componentWillUnmount () {
+    base.removeBinding(this.ref)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.setState({ accounts: nextProps.accounts })
   }
 
   handleClick = (e, titleProps) => {
@@ -111,9 +127,9 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-    accounts: state.accounts,
-    activeFilters: state.filters.activeFilters,
-    filteredAccounts: state.filters.filteredAccounts
+  accounts: state.accounts,
+  activeFilters: state.filters.activeFilters,
+  filteredAccounts: state.filters.filteredAccounts
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

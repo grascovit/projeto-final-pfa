@@ -17,10 +17,12 @@
     "react-scripts": "1.0.14"
   },
   "dependencies": {
+    "firebase": "^4.8.0",
     "history": "^4.7.2",
     "lodash": "^4.17.4",
     "moment": "^2.19.1",
     "prop-types": "^15.6.0",
+    "re-base": "^3.2.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",

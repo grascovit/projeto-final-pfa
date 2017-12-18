@@ -8,8 +8,24 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import AccountForm from '../components/forms/AccountForm'
 import TransactionForm from '../components/forms/TransactionForm'
+import base from '../base'
 
 class Cadastro extends Component {
+  componentWillMount () {
+    this.ref = base.syncState('accounts', {
+      context: this,
+      state: 'accounts'
+    })
+  }
+
+  componentWillUnmount () {
+    base.removeBinding(this.ref)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.setState({ accounts: nextProps.accounts })
+  }
+
   render() {
     return (
       <Layout router={this.props.history} icon='dollar' header='Cadastro' subheader='Cadastro de contas e transações'>
